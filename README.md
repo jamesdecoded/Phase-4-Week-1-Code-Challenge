@@ -1,47 +1,57 @@
-# Flask Superheroes API
+# Superheroes API (student-friendly)
 
-This repository is an implementation of the Phase 4 Week 1 Code Challenge "Superheroes" API.
+This is a small Flask app for the Phase 4 Week 1 Code Challenge — it tracks heroes and their powers.
 
-Setup
+Quick setup
 
-1. Create and activate a virtual environment (recommended):
+1. Make a virtual environment and activate it:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-2. Install dependencies:
+2. Install the packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Seed the database:
+3. Seed the database (this wipes and fills it with sample data):
 
 ```bash
 python seed.py
 ```
 
-4. Run the app:
+4. Start the app:
 
 ```bash
 python app.py
 ```
 
-The app will run on `http://127.0.0.1:5000` by default.
+Open `http://127.0.0.1:5000` in your browser or use curl/Postman to try the endpoints.
 
-Endpoints
+Main endpoints (examples)
 
-- `GET /heroes` - list heroes (id, name, super_name)
-- `GET /heroes/<id>` - show hero with nested `hero_powers` and `power`
-- `GET /powers` - list powers
-- `GET /powers/<id>` - show single power
-- `PATCH /powers/<id>` - update a power's description (must be >= 20 chars)
-- `POST /hero_powers` - create a hero_power. Body: `{ "strength": "Average", "power_id": 1, "hero_id": 3 }`
+- `GET /heroes` — returns a list of heroes (id, name, super_name)
+- `GET /heroes/1` — returns hero #1 and their `hero_powers` (with nested `power` info)
+- `GET /powers` — returns a list of powers
+- `GET /powers/1` — returns power #1
+- `PATCH /powers/1` — update the description (must be at least 20 characters)
+  - Example body: `{ "description": "A detailed description at least 20 chars long." }`
+- `POST /hero_powers` — create a hero_power
+  - Example body: `{ "strength": "Average", "power_id": 1, "hero_id": 3 }`
 
-Notes
+Notes and gotchas
 
-- The database uses SQLite at `superheroes.db` by default.
+- DB file: `superheroes.db` (SQLite) in the project root.
 - Valid strengths: `Strong`, `Weak`, `Average`.
-- `Power.description` must be at least 20 characters to pass validation when updating.
+- When updating a power, `description` must be >= 20 chars.
+- `seed.py` creates the sample data used in the challenge.
+
+If you want, I can:
+- Add migrations with Flask-Migrate,
+- Add the Postman collection to the repo,
+- Or run some quick sanity curl checks for you.
+
+Have fun! If anything breaks when you run it, tell me what error you see and I’ll fix it.
